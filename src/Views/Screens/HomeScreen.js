@@ -49,21 +49,10 @@ const Home = () => {
     });
   };
 
-  const getFavorites = () => {
-    dispatch({
-      type: GET_FAVORITE_MOVIES_REQUEST,
-    });
-  };
-
   useEffect(() => {
     getMovies('popular');
     getGenres();
-    getFavorites();
   }, []);
-
-  useEffect(() => {
-    setnumOfFavorites(favorites);
-  }, [favorites]);
 
   const navigation = useNavigation();
 
@@ -78,19 +67,6 @@ const Home = () => {
 
   return (
     <View>
-      {
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <Icon name="star" size={30} color={colors.primary} />
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: '900',
-            }}>{`Favorites: ${
-            numOfFavorites ? numOfFavorites.length : 0
-          }`}</Text>
-        </View>
-      }
-
       <FlatList
         data={movies}
         refreshControl={
