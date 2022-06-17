@@ -1,25 +1,13 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
-import {
-  ADD_TO_FAVORITE_MOVIES_REQUEST,
-  GET_FAVORITE_MOVIES_REQUEST,
-} from '../../models/favorites/types';
+import {ADD_TO_FAVORITE_MOVIES_REQUEST} from '../../models/favorites/types';
 import {GET_MOVIES_REQUEST} from '../../models/movies/types';
 import {GET_GENERS_REQUEST} from '../../models/generes/types';
 
-import {GET_USER_INFO_REQUEST} from '../../models/user/actions';
-import HighlightedScrollView from '../Customs/HighlightedScrollView';
-import ListViewColumn from '../Customs/ListViewColumn';
 import OptionsScrollView from '../Customs/OptionsScrollView';
 import ListViewItem from '../Customs/ListViewItem';
-import {
-  FlatList,
-  RefreshControl,
-  View,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
+import {FlatList, RefreshControl, View} from 'react-native';
 import {colors, PADDING} from '../components/Theme';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 

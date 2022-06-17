@@ -6,9 +6,9 @@ import HomeScreen from '../Views/Screens/HomeScreen';
 import ProfileScreen from '../Views/Screens/ProfileScreen';
 import ArticleDetails from '../Views/Screens/ArticleDetails';
 import FavoritesScreen from '../Views/Screens/FavoritesScreen';
-import SplashScreen from '../Views/Screens/SplashScreen';
+
 import Tabs from '../Views/Screens/Tabs';
-import NewsflashScreen from '../Views/Screens/NewsflashScreen';
+
 import {View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import LoginScreen from '../Views/Screens/LoginScreen';
@@ -62,7 +62,6 @@ const MainStack = () => {
 
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="Favorites" component={FavoritesScreen} />
-      <Stack.Screen name="Newsflash" component={NewsflashScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
     </Stack.Navigator>
   );

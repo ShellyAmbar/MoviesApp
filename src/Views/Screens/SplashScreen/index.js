@@ -1,7 +1,9 @@
 import {useNavigation, useTheme} from '@react-navigation/native';
 import React, {useState, useEffect} from 'react';
 import {View, Text, Image} from 'react-native';
+import {colors} from '../../components/Theme';
 import {styles} from './styles';
+
 const SplashScreen = () => {
   const [isVisible, setIsVisible] = useState(true);
   const navigation = useNavigation();
@@ -14,14 +16,14 @@ const SplashScreen = () => {
   useEffect(() => {
     setTimeout(() => {
       hideSplashScreen();
-      navigation.navigate('Signup');
+      // navigation.navigate('Signup');
     }, 1500);
   }, []);
 
   const renderSplash = () => {
     return (
       <View style={styles().SplashScreen_ChildView}>
-        <Text style={{textAlign: 'center'}}>Movies App</Text>
+        <Text style={styles().SplashScreenText}>Movies App</Text>
       </View>
     );
   };

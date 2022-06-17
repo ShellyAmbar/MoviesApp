@@ -5,7 +5,6 @@ import Icon from 'react-native-vector-icons/dist/Ionicons';
 import {moderateScale} from 'react-native-size-matters';
 import HomeScreen from './HomeScreen';
 import FavoritesScreen from './FavoritesScreen';
-import NewsflashScreen from './NewsflashScreen';
 import ProfileScreen from './ProfileScreen';
 
 const Tabs = () => {
@@ -36,15 +35,7 @@ const Tabs = () => {
           ),
         }}
       />
-      <Tab.Screen
-        name="Newsflash"
-        component={NewsflashScreen}
-        options={{
-          tabBarIcon: ({size, color}) => (
-            <Icon name="flash-sharp" size={size} color={color}></Icon>
-          ),
-        }}
-      />
+
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
