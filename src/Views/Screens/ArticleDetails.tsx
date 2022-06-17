@@ -7,15 +7,53 @@ import {
   Linking,
   Alert,
   ScrollView,
+  TouchableOpacity,
 } from 'react-native';
 import dateFormat from 'dateformat';
 import {ItemMovie} from '../components/objects/movie';
+import {useDispatch, useSelector} from 'react-redux';
+import {
+  ADD_TO_FAVORITE_MOVIES_REQUEST,
+  REMOVE_FROM_FAVORITE_MOVIES_REQUEST,
+} from '../../models/favorites/types';
+import Icon from 'react-native-vector-icons/dist/Ionicons';
 
 const ArticleDetails = props => {
   const article: ItemMovie = props.route.params.article;
-
+  const dispatch = useDispatch();
+  const {favorites} = useSelector(state => state.favorites);
   const convertDateToStringFormat = date => {
     return dateFormat(date, 'mmmm dS, yyyy');
+  };
+
+  const removeFromFavorites = favorite => {
+    dispatch({
+      type: REMOVE_FROM_FAVORITE_MOVIES_REQUEST,
+      payload: favorite,
+    });
+  };
+  const addToFavorites = favorite => {
+    dispatch({
+      type: ADD_TO_FAVORITE_MOVIES_REQUEST,
+      favorite,
+    });
+  };
+
+  const isLiked = () => {
+    let isLiked = false;
+    let liked = favorites.filter(item => item.id === article.id);
+    if (liked.length === 1) {
+      isLiked = true;
+    }
+    return isLiked;
+  };
+
+  const onClickeLike = () => {
+    if (isLiked()) {
+      removeFromFavorites(article);
+    } else {
+      addToFavorites(article);
+    }
   };
 
   return (
@@ -54,6 +92,26 @@ const ArticleDetails = props => {
             article.release_date,
           )},  Vote average: ${article.vote_average}  `}
         </Text>
+        <View
+          style={{
+            justifyContent: 'center',
+
+            alignItems: 'center',
+            height: 60,
+            width: 100,
+            borderRadius: 10,
+            marginBottom: 10,
+            //paddingStart: 5,
+            backgroundColor: 'rgba(255, 0, 0, 0.4)',
+          }}>
+          <TouchableOpacity onPress={() => onClickeLike()}>
+            {isLiked() ? (
+              <Icon name="star" size={30} color={'#FFFF'} />
+            ) : (
+              <Icon name="star-outline" size={30} color={'#FFFF'} />
+            )}
+          </TouchableOpacity>
+        </View>
         <Image
           source={{
             uri: `https://image.tmdb.org/t/p/w500${article.poster_path}`,

@@ -1,7 +1,10 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
-import {ADD_TO_FAVORITE_MOVIES_REQUEST} from '../../models/favorites/types';
+import {
+  ADD_TO_FAVORITE_MOVIES_REQUEST,
+  GET_FAVORITE_MOVIES_REQUEST,
+} from '../../models/favorites/types';
 import {GET_MOVIES_REQUEST} from '../../models/movies/types';
 import {GET_GENERS_REQUEST} from '../../models/generes/types';
 
@@ -10,14 +13,23 @@ import HighlightedScrollView from '../Customs/HighlightedScrollView';
 import ListViewColumn from '../Customs/ListViewColumn';
 import OptionsScrollView from '../Customs/OptionsScrollView';
 import ListViewItem from '../Customs/ListViewItem';
-import {FlatList, RefreshControl, View, TouchableOpacity} from 'react-native';
+import {
+  FlatList,
+  RefreshControl,
+  View,
+  TouchableOpacity,
+  Text,
+} from 'react-native';
 import {colors, PADDING} from '../components/Theme';
+import Icon from 'react-native-vector-icons/dist/Ionicons';
 
 const Home = () => {
   const dispatch = useDispatch();
-  const movies = useSelector(state => state.movies.movies);
-  const genres = useSelector(state => state.genres.genres);
+  const {movies} = useSelector(state => state.movies);
+  const {genres} = useSelector(state => state.genres);
+  const {favorites} = useSelector(state => state.favorites);
   const [refreshing, setRefreshing] = useState(false);
+  const [numOfFavorites, setnumOfFavorites] = useState(favorites);
 
   const getMovies = genre => {
     dispatch({
@@ -37,10 +49,21 @@ const Home = () => {
     });
   };
 
+  const getFavorites = () => {
+    dispatch({
+      type: GET_FAVORITE_MOVIES_REQUEST,
+    });
+  };
+
   useEffect(() => {
     getMovies('popular');
     getGenres();
+    getFavorites();
   }, []);
+
+  useEffect(() => {
+    setnumOfFavorites(favorites);
+  }, [favorites]);
 
   const navigation = useNavigation();
 
@@ -55,6 +78,19 @@ const Home = () => {
 
   return (
     <View>
+      {
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Icon name="star" size={30} color={colors.primary} />
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: '900',
+            }}>{`Favorites: ${
+            numOfFavorites ? numOfFavorites.length : 0
+          }`}</Text>
+        </View>
+      }
+
       <FlatList
         data={movies}
         refreshControl={
@@ -64,7 +100,7 @@ const Home = () => {
             refreshing={refreshing}
             onRefresh={async () => {
               setRefreshing(true);
-              await getMovies();
+              await getMovies('popular');
               setRefreshing(false);
             }}
           />
