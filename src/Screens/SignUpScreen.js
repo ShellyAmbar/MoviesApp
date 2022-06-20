@@ -1,9 +1,9 @@
 import React, {useContext, useState} from 'react';
 import {View, Text, TouchableOpacity, Platform, StyleSheet} from 'react-native';
-import FormInput from '../Customs/FormInput';
-import FormButton from '../Customs/FormButton';
-import SocialButton from '../Customs/SocialButton';
-import {AuthContext} from '../../navigation/AuthProvider.android';
+import FormInput from '../components/FormInput';
+import FormButton from '../components/FormButton';
+import SocialButton from '../components/SocialButton';
+import {AuthContext} from '../navigation/AuthProvider';
 import {useNavigation, useTheme} from '@react-navigation/native';
 
 const SignUpScreen = () => {
@@ -11,8 +11,7 @@ const SignUpScreen = () => {
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
   const navigation = useNavigation();
-
-  const {register} = useContext(AuthContext);
+  const {register, fbSignup, googleSignUp} = useContext(AuthContext);
 
   const handleSignUpSuccess = () => {
     navigation.navigate('Tabs');
@@ -75,7 +74,7 @@ const SignUpScreen = () => {
             btnType="facebook"
             color="#4867aa"
             backgroundColor="#e6eaf4"
-            onPress={() => {}}
+            onPress={() => fbSignup(() => handleLoginSuccess())}
           />
 
           <SocialButton
@@ -83,7 +82,7 @@ const SignUpScreen = () => {
             btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"
-            onPress={() => {}}
+            onPress={() => googleSignUp(() => handleLoginSuccess())}
           />
         </View>
       ) : null}

@@ -1,14 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
-import {ADD_TO_FAVORITE_MOVIES_REQUEST} from '../../models/favorites/types';
-import {GET_MOVIES_REQUEST} from '../../models/movies/types';
-import {GET_GENERS_REQUEST} from '../../models/generes/types';
+import {ADD_TO_FAVORITE_MOVIES_REQUEST} from '../models/favorites/types';
+import {GET_MOVIES_REQUEST} from '../models/movies/types';
+import {GET_GENERS_REQUEST} from '../models/generes/types';
 
-import OptionsScrollView from '../Customs/OptionsScrollView';
-import ListViewItem from '../Customs/ListViewItem';
+import OptionsScrollView from '../components/OptionsScrollView';
+import ListViewItem from '../components/ListViewItem';
 import {FlatList, RefreshControl, View} from 'react-native';
-import {colors, PADDING} from '../components/Theme';
+import {colors, PADDING} from '../utils/Theme';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 
 const Home = () => {
@@ -54,41 +54,39 @@ const Home = () => {
   };
 
   return (
-    <View>
-      <FlatList
-        data={movies}
-        refreshControl={
-          <RefreshControl
-            tintColor={colors.primary}
-            colors={[colors.primary]}
-            refreshing={refreshing}
-            onRefresh={async () => {
-              setRefreshing(true);
-              await getMovies('popular');
-              setRefreshing(false);
-            }}
+    <FlatList
+      data={movies}
+      refreshControl={
+        <RefreshControl
+          tintColor={colors.primary}
+          colors={[colors.primary]}
+          refreshing={refreshing}
+          onRefresh={async () => {
+            setRefreshing(true);
+            await getMovies('popular');
+            setRefreshing(false);
+          }}
+        />
+      }
+      ListHeaderComponent={
+        <OptionsScrollView
+          dataList={genres}
+          onClickOption={value => onClickGenre(value)}
+        />
+      }
+      showsVerticalScrollIndicator={false}
+      renderItem={({item, index}) => {
+        return (
+          <ListViewItem
+            key={index}
+            isLiked={false}
+            onClickStar={item => addToFavorites(item)}
+            obj={item}
+            onPress={() => onClickItem(item)}
           />
-        }
-        ListHeaderComponent={
-          <OptionsScrollView
-            dataList={genres}
-            onClickOption={value => onClickGenre(value)}
-          />
-        }
-        showsVerticalScrollIndicator={false}
-        renderItem={({item, index}) => {
-          return (
-            <ListViewItem
-              key={index}
-              isLiked={false}
-              onClickStar={item => addToFavorites(item)}
-              obj={item}
-              onPress={() => onClickItem(item)}
-            />
-          );
-        }}
-      />
-    </View>
+        );
+      }}
+    />
   );
 };
 

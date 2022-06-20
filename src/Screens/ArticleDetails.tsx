@@ -3,26 +3,25 @@ import {
   View,
   Text,
   Image,
-  Button,
-  Linking,
-  Alert,
   ScrollView,
   TouchableOpacity,
+  StyleSheet,
 } from 'react-native';
 import dateFormat from 'dateformat';
-import {ItemMovie} from '../components/objects/movie';
+import {ItemMovie} from '../objects/movie';
 import {useDispatch, useSelector} from 'react-redux';
 import {
   ADD_TO_FAVORITE_MOVIES_REQUEST,
   REMOVE_FROM_FAVORITE_MOVIES_REQUEST,
-} from '../../models/favorites/types';
+} from '../models/favorites/types';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
-import {colors} from '../components/Theme';
+import {colors} from '../utils/Theme';
+import {rootState} from '../models/root-reducer';
 
 const ArticleDetails = props => {
   const article: ItemMovie = props.route.params.article;
   const dispatch = useDispatch();
-  const {favorites} = useSelector(state => state.favorites);
+  const {favorites} = useSelector((state: typeof rootState) => state.favorites);
 
   const [numOfFavorites, setnumOfFavorites] = useState(favorites);
 
@@ -67,12 +66,7 @@ const ArticleDetails = props => {
   return (
     <>
       {
-        <View
-          style={{
-            marginTop: 20,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
+        <View style={styles.container}>
           <Icon name="star" size={30} color={colors.primary} />
           <Text
             style={{
@@ -84,52 +78,14 @@ const ArticleDetails = props => {
         </View>
       }
       <ScrollView>
-        <View
-          style={{
-            width: '100%',
-            height: '100%',
-            flex: 1,
-            alignItems: 'center',
-            padding: 10,
-          }}>
-          <Text
-            style={{
-              margin: 10,
-              padding: 10,
-              fontSize: 30,
-              width: '90%',
-              textAlign: 'justify',
-              fontWeight: '700',
-            }}>
-            {article.title}
-          </Text>
-          <Text
-            style={{
-              margin: 10,
-              padding: 10,
-              fontSize: 25,
-              width: '100%',
-
-              textAlign: 'center',
-
-              fontWeight: '700',
-            }}>
+        <View style={styles.scrollview}>
+          <Text style={styles.title}>{article.title}</Text>
+          <Text style={styles.subTitle}>
             {` Released Date:${convertDateToStringFormat(
               article.release_date,
             )},  Vote average: ${article.vote_average}  `}
           </Text>
-          <View
-            style={{
-              justifyContent: 'center',
-
-              alignItems: 'center',
-              height: 60,
-              width: 100,
-              borderRadius: 10,
-              marginBottom: 10,
-              //paddingStart: 5,
-              backgroundColor: 'rgba(255, 0, 0, 0.4)',
-            }}>
+          <View style={styles.btnLike}>
             <TouchableOpacity onPress={() => onClickeLike()}>
               {isLiked() ? (
                 <Icon name="star" size={30} color={'#FFFF'} />
@@ -142,20 +98,9 @@ const ArticleDetails = props => {
             source={{
               uri: `https://image.tmdb.org/t/p/w500${article.poster_path}`,
             }}
-            style={{height: 330, width: '100%', borderRadius: 10}}
+            style={styles.img}
           />
-          <Text
-            style={{
-              margin: 10,
-              padding: 10,
-              fontSize: 20,
-              width: '90%',
-
-              textAlign: 'justify',
-              fontWeight: '400',
-            }}>
-            {article.overview}
-          </Text>
+          <Text style={styles.mainText}>{article.overview}</Text>
         </View>
       </ScrollView>
     </>
@@ -163,3 +108,61 @@ const ArticleDetails = props => {
 };
 
 export default ArticleDetails;
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  scrollview: {
+    width: '100%',
+    height: '100%',
+    flex: 1,
+    alignItems: 'center',
+    padding: 10,
+  },
+  mainText: {
+    margin: 10,
+    padding: 10,
+    fontSize: 20,
+    width: '90%',
+
+    textAlign: 'justify',
+    fontWeight: '400',
+  },
+  title: {
+    margin: 10,
+    padding: 10,
+    fontSize: 30,
+    width: '90%',
+    textAlign: 'justify',
+    fontWeight: '700',
+  },
+  subTitle: {
+    margin: 10,
+    padding: 10,
+    fontSize: 25,
+    width: '100%',
+
+    textAlign: 'center',
+
+    fontWeight: '700',
+  },
+  btnLike: {
+    justifyContent: 'center',
+
+    alignItems: 'center',
+    height: 60,
+    width: 100,
+    borderRadius: 10,
+    marginBottom: 10,
+    //paddingStart: 5,
+    backgroundColor: 'rgba(255, 0, 0, 0.4)',
+  },
+  img: {
+    height: 330,
+    width: '100%',
+    borderRadius: 10,
+  },
+});

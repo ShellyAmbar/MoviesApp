@@ -4,7 +4,7 @@ import {MainStack} from './MainStack';
 import React, {useContext, useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
-import {AuthContext} from './AuthProvider.android';
+import {AuthContext} from './AuthProvider';
 
 const RootNavigation = () => {
   const {user, setUser} = useContext(AuthContext);
@@ -22,8 +22,7 @@ const RootNavigation = () => {
   if (initializing) return null;
   return (
     <NavigationContainer>
-      {/* {user ? <MainStack /> : <AuthStack />} */}
-      <MainStack />
+      {user ? <MainStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

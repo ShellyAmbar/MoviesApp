@@ -1674,7 +1674,7 @@
   "resolved" "https://registry.npmjs.org/@react-native-firebase/firestore/-/firestore-12.9.3.tgz"
   "version" "12.9.3"
 
-"@react-native-google-signin/google-signin@^7.0.0-alpha.3":
+"@react-native-google-signin/google-signin@^7.2.2":
   "integrity" "sha512-FqSJAEYz+SNeIOyokFX3e7nbBgK0js/Hye0YNY+cV0Qf1NxKw1vRt2MQB3kfuVWFCb+OSovgQCl6W8dhYvsblw=="
   "resolved" "https://registry.npmjs.org/@react-native-google-signin/google-signin/-/google-signin-7.2.2.tgz"
   "version" "7.2.2"

@@ -5,10 +5,10 @@ import {connect, useDispatch, useSelector} from 'react-redux';
 import {
   GET_FAVORITE_MOVIES_REQUEST,
   REMOVE_FROM_FAVORITE_MOVIES_REQUEST,
-} from '../../models/favorites/types';
+} from '../models/favorites/types';
 
-import ListViewItem from '../Customs/ListViewItem';
-import {colors, PADDING} from '../components/Theme';
+import ListViewItem from '../components/ListViewItem';
+import {colors, PADDING} from '../utils/Theme';
 
 const Favorites = () => {
   const navigation = useNavigation();

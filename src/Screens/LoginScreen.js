@@ -8,10 +8,10 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
-import FormInput from '../Customs/FormInput';
-import FormButton from '../Customs/FormButton';
-import SocialButton from '../Customs/SocialButton';
-import {AuthContext} from '../../navigation/AuthProvider.android';
+import FormInput from '../components/FormInput';
+import FormButton from '../components//FormButton';
+import SocialButton from '../components/SocialButton';
+import {AuthContext} from '../navigation/AuthProvider';
 import {useNavigation, useTheme} from '@react-navigation/native';
 
 const LoginScreen = () => {

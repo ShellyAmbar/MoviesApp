@@ -1,6 +1,6 @@
 import {View, Text, Button, StyleSheet} from 'react-native';
 import React, {useContext, useState} from 'react';
-import {AuthContext} from '../../navigation/AuthProvider.android';
+import {AuthContext} from '../navigation/AuthProvider';
 import {useNavigation} from '@react-navigation/native';
 
 const ProfileScreen = () => {

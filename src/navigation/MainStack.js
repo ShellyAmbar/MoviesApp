@@ -2,16 +2,16 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
-import HomeScreen from '../Views/Screens/HomeScreen';
-import ProfileScreen from '../Views/Screens/ProfileScreen';
-import ArticleDetails from '../Views/Screens/ArticleDetails';
-import FavoritesScreen from '../Views/Screens/FavoritesScreen';
+import HomeScreen from '../Screens/HomeScreen';
+import ProfileScreen from '../Screens/ProfileScreen';
+import ArticleDetails from '../Screens/ArticleDetails';
+import FavoritesScreen from '../Screens/FavoritesScreen';
 
-import Tabs from '../Views/Screens/Tabs';
+import Tabs from '../Screens/Tabs';
 
 import {View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
-import LoginScreen from '../Views/Screens/LoginScreen';
+import LoginScreen from '../Screens/LoginScreen';
 
 const MainStack = () => {
   return (

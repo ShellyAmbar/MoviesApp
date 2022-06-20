@@ -1,11 +1,14 @@
 import React from 'react';
-import {View, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {View, Text, ScrollView, TouchableOpacity, FlatList} from 'react-native';
 
 const OptionsScrollView = ({dataList, onClickOption}) => {
   return (
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-      {dataList &&
-        dataList.map((item, index) => (
+    <FlatList
+      horizontal={true}
+      data={dataList}
+      showsVerticalScrollIndicator={false}
+      renderItem={({item, index}) => {
+        return (
           <TouchableOpacity
             key={index}
             onPress={() => {
@@ -26,8 +29,9 @@ const OptionsScrollView = ({dataList, onClickOption}) => {
               </Text>
             </View>
           </TouchableOpacity>
-        ))}
-    </ScrollView>
+        );
+      }}
+    />
   );
 };
 

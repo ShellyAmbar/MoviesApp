@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
-import {colors} from '../components/Theme';
+import {colors} from '../utils/Theme';
 
 interface ItemMovie {
   adult: false;

@@ -1,15 +1,15 @@
 import React, {useEffect} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 const Stack = createStackNavigator();
-import HomeScreen from '../Views/Screens/HomeScreen';
-import ProfileScreen from '../Views/Screens/ProfileScreen';
-import LoginScreen from '../Views/Screens/LoginScreen';
-import ArticleDetails from '../Views/Screens/ArticleDetails';
+import HomeScreen from '../Screens/HomeScreen';
+import ProfileScreen from '../Screens/ProfileScreen';
+import LoginScreen from '../Screens/LoginScreen';
+import ArticleDetails from '../Screens/ArticleDetails';
 
-import FavoritesScreen from '../Views/Screens/FavoritesScreen';
-import SplashScreen from '../Views/Screens/SplashScreen';
-import Tabs from '../Views/Screens/Tabs';
-import SignUpScreen from '../Views/Screens/SignUpScreen';
+import FavoritesScreen from '../Screens/FavoritesScreen';
+import SplashScreen from '../Screens/SplashScreen';
+import Tabs from '../Screens/Tabs';
+import SignUpScreen from '../Screens/SignUpScreen';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import {View} from 'react-native';
@@ -18,7 +18,7 @@ const AuthStack = () => {
   useEffect(() => {
     GoogleSignin.configure({
       webClientId:
-        '149636402307-aojve5arh8pj22d4ba55ica3p4ri8qit.apps.googleusercontent.com',
+        '871504711219-96h7tsrhlomme914aeqg4jorj3nesaa2.apps.googleusercontent.com',
     });
   }, []);
 
