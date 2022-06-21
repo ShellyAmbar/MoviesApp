@@ -16,7 +16,8 @@ export const colors = {
   success: '#84DD63',
   overlay: 'rgba(00,00,00,0.1)',
   bg: '#FAFAFC',
-  sexyBlue: '#256EFC',
+  darkBlue: '#00008b',
+  darkRed: '#d80000',
   buttonOverlayGrey: '#cccccc',
   lightBlue: '#E3EDFF',
 };

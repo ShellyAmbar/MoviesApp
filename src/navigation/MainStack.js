@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 const Stack = createStackNavigator();
 import HomeScreen from '../Screens/HomeScreen';
 import ProfileScreen from '../Screens/ProfileScreen';
-import ArticleDetails from '../Screens/ArticleDetails';
+import PageDetails from '../Screens/PageDetails';
 import FavoritesScreen from '../Screens/FavoritesScreen';
 
 import Tabs from '../Screens/Tabs';
@@ -16,13 +16,12 @@ import LoginScreen from '../Screens/LoginScreen';
 const MainStack = () => {
   return (
     <Stack.Navigator
-      initialRouteName="Tabs"
+      initialRouteName="Home"
       screenOptions={{headerShown: false}}>
-      {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
       <Stack.Screen name="Tabs" component={Tabs} />
 
       <Stack.Screen
-        name="ArticleDetails"
+        name="PageDetails"
         options={{
           title: '',
           headerTitleAlign: 'center',
@@ -38,7 +37,7 @@ const MainStack = () => {
             </View>
           ),
         }}
-        component={ArticleDetails}
+        component={PageDetails}
       />
       <Stack.Screen
         name="Login"
@@ -60,9 +59,22 @@ const MainStack = () => {
         component={LoginScreen}
       />
 
-      <Stack.Screen name="Profile" component={ProfileScreen} />
+      {/* <Stack.Screen name="Profile" component={ProfileScreen} /> */}
       <Stack.Screen name="Favorites" component={FavoritesScreen} />
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: '',
+          headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#fff',
+            shadowColor: '#fff',
+            elevation: 0,
+          },
+          headerBackTitleVisible: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };

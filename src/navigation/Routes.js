@@ -22,7 +22,8 @@ const RootNavigation = () => {
   if (initializing) return null;
   return (
     <NavigationContainer>
-      {user ? <MainStack /> : <AuthStack />}
+      {/* {user ? <MainStack /> : <AuthStack />} */}
+      <AuthStack />
     </NavigationContainer>
   );
 };

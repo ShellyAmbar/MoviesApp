@@ -18,8 +18,8 @@ import Icon from 'react-native-vector-icons/dist/Ionicons';
 import {colors} from '../utils/Theme';
 import {rootState} from '../models/root-reducer';
 
-const ArticleDetails = props => {
-  const article: ItemMovie = props.route.params.article;
+const PageDetails = props => {
+  const movie: ItemMovie = props.route.params.movie;
   const dispatch = useDispatch();
   const {favorites} = useSelector((state: typeof rootState) => state.favorites);
 
@@ -48,7 +48,7 @@ const ArticleDetails = props => {
 
   const isLiked = () => {
     let isLiked = false;
-    let liked = favorites.filter(item => item.id === article.id);
+    let liked = favorites.filter(item => item.id === movie.id);
     if (liked.length === 1) {
       isLiked = true;
     }
@@ -57,33 +57,30 @@ const ArticleDetails = props => {
 
   const onClickeLike = () => {
     if (isLiked()) {
-      removeFromFavorites(article);
+      removeFromFavorites(movie);
     } else {
-      addToFavorites(article);
+      addToFavorites(movie);
     }
   };
 
   return (
     <>
-      {
-        <View style={styles.container}>
-          <Icon name="star" size={30} color={colors.primary} />
-          <Text
-            style={{
-              fontSize: 20,
-              fontWeight: '900',
-            }}>{`Favorites: ${
-            numOfFavorites ? numOfFavorites.length : 0
-          }`}</Text>
-        </View>
-      }
+      <View style={styles.container}>
+        <Icon name="star" size={30} color={colors.primary} />
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: '900',
+          }}>{`Favorites: ${numOfFavorites ? numOfFavorites.length : 0}`}</Text>
+      </View>
+
       <ScrollView>
         <View style={styles.scrollview}>
-          <Text style={styles.title}>{article.title}</Text>
+          <Text style={styles.title}>{movie.title}</Text>
           <Text style={styles.subTitle}>
             {` Released Date:${convertDateToStringFormat(
-              article.release_date,
-            )},  Vote average: ${article.vote_average}  `}
+              movie.release_date,
+            )},  Vote average: ${movie.vote_average}  `}
           </Text>
           <View style={styles.btnLike}>
             <TouchableOpacity onPress={() => onClickeLike()}>
@@ -96,18 +93,18 @@ const ArticleDetails = props => {
           </View>
           <Image
             source={{
-              uri: `https://image.tmdb.org/t/p/w500${article.poster_path}`,
+              uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
             }}
             style={styles.img}
           />
-          <Text style={styles.mainText}>{article.overview}</Text>
+          <Text style={styles.mainText}>{movie.overview}</Text>
         </View>
       </ScrollView>
     </>
   );
 };
 
-export default ArticleDetails;
+export default PageDetails;
 
 const styles = StyleSheet.create({
   container: {

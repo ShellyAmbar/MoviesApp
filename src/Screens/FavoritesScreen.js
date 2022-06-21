@@ -17,7 +17,7 @@ const Favorites = () => {
   const {favorites} = useSelector(state => state.favorites);
 
   const onClickItem = article => {
-    navigation.navigate('ArticleDetails', {article});
+    navigation.navigate('PageDetails', {article});
   };
 
   const getFavorites = () => {

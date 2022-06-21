@@ -9,12 +9,13 @@ const SocialButton = ({
   btnType,
   color,
   backgroundColor,
+  style,
   ...rest
 }) => {
   let bgColor = backgroundColor;
   return (
     <TouchableOpacity
-      style={[styles.buttonContainer, {backgroundColor: bgColor}]}
+      style={[styles.buttonContainer, {backgroundColor: bgColor}, {...style}]}
       {...rest}>
       <View style={styles.iconWrapper}>
         <FontAwesome
